@@ -1,0 +1,204 @@
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#FFF"
+    android:elevation="4dp">
+
+    <android.widget.EditText
+        android:id="@+id/threadText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Set your thread title..."
+        android:inputType="textCapSentences"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:textSize="24sp"
+        android:maxLength="25"
+        android:layout_below="@+id/buttonNext"
+        android:layout_alignRight="@+id/buttonNext"
+        android:layout_alignEnd="@+id/buttonNext"
+        android:layout_alignLeft="@+id/buttonCancel"
+        android:layout_alignStart="@+id/buttonCancel">
+
+    </android.widget.EditText>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:background="@android:color/transparent"
+        android:text="Next"
+        android:id="@+id/buttonNext"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textSize="16sp"
+        android:clickable="false"
+        android:layout_marginRight="8dp" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:background="@android:color/transparent"
+        android:text="Cancel"
+        android:id="@+id/buttonCancel"
+        android:textSize="16sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:clickable="false"
+        android:layout_marginLeft="8dp" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        android:layout_below="@+id/threadText"
+        android:layout_alignLeft="@+id/buttonCancel"
+        android:layout_alignStart="@+id/buttonCancel"
+        android:layout_alignRight="@+id/buttonNext"
+        android:layout_alignEnd="@+id/buttonNext"
+        android:id="@+id/linearLayout">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="75dp"
+            android:layout_weight=".25"
+            android:layout_marginRight="2dp" >
+
+            <RadioButton
+                android:text="EVENT"
+                android:background="@drawable/checkbox_event"
+                android:button="@null"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/radioEvent"
+                android:textSize="11sp"
+                android:checked="true"
+                android:padding="8dp"
+                android:clickable="true"
+                android:gravity="bottom|center_horizontal" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:clickable="false"
+                android:src="@drawable/ic_event"
+                android:paddingTop="12dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="75dp"
+            android:layout_weight=".25"
+            android:layout_marginRight="2dp"
+            android:layout_marginLeft="2dp">
+
+            <RadioButton
+                android:text="DEBATE"
+                android:background="@drawable/checkbox_debate"
+                android:button="@null"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/radioDebate"
+                android:textSize="11sp"
+                android:checked="false"
+                android:padding="8dp"
+                android:clickable="true"
+                android:gravity="bottom|center_horizontal" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:clickable="false"
+                android:src="@drawable/ic_debate"
+                android:paddingTop="12dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="75dp"
+            android:layout_weight=".25"
+            android:layout_marginRight="2dp"
+            android:layout_marginLeft="2dp">
+
+            <RadioButton
+                android:text="AWARENESS"
+                android:background="@drawable/checkbox_awareness"
+                android:button="@null"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/radioAware"
+                android:textSize="11sp"
+                android:checked="false"
+                android:padding="8dp"
+                android:clickable="true"
+                android:gravity="bottom|center_horizontal" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:clickable="false"
+                android:src="@drawable/ic_awareness"
+                android:paddingTop="12dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="75dp"
+            android:layout_weight=".25"
+            android:layout_marginLeft="2dp">
+
+            <RadioButton
+                android:text="CURIOSITY"
+                android:background="@drawable/checkbox_curiosity"
+                android:button="@null"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/radioCurious"
+                android:textSize="11sp"
+                android:checked="false"
+                android:padding="8dp"
+                android:clickable="true"
+                android:gravity="bottom|center_horizontal" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:clickable="false"
+                android:src="@drawable/ic_curiosity"
+                android:paddingTop="12dp" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/radio_event"
+        android:id="@+id/radioTooltip"
+        android:layout_below="@+id/linearLayout"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignLeft="@+id/linearLayout"
+        android:layout_alignStart="@+id/linearLayout"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:minLines="2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="0/25"
+        android:textSize="12sp"
+        android:id="@+id/titleCount"
+        android:layout_below="@+id/buttonNext"
+        android:layout_alignRight="@+id/threadText"
+        android:layout_alignEnd="@+id/threadText" />
+
+</RelativeLayout>

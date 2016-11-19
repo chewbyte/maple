@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/lmfao"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Space
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/space" />
+
+    <com.chewbyte.geogab.view.TriangleShapeView
+        android:layout_width="252dp"
+        android:layout_height="90dp"
+        android:layout_alignRight="@+id/textView"
+        android:layout_alignEnd="@+id/textView"
+        android:id="@+id/view2">
+    </com.chewbyte.geogab.view.TriangleShapeView>
+
+    <TextView
+        android:layout_width="216dp"
+        android:layout_height="20dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Thread Title"
+        android:id="@+id/textView"
+        android:background="#FF4F87FF"
+        android:textColor="#FFF"
+        android:textSize="14sp"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/space"
+        android:layout_toRightOf="@+id/space"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="42dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="52dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Thread Displayed Comment."
+        android:id="@+id/textView2"
+        android:layout_below="@+id/textView"
+        android:layout_alignRight="@+id/textView"
+        android:layout_alignEnd="@+id/textView"
+        android:layout_toEndOf="@+id/space"
+        android:paddingLeft="42dp"
+        android:layout_toRightOf="@+id/space"
+        android:textSize="12sp"
+        android:paddingRight="6dp"
+        android:paddingBottom="4dp"
+        android:gravity="top|left"
+        android:paddingTop="2dp" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/profile_image"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:src="@drawable/profile"
+        app:civ_border_width="2dp"
+        app:civ_border_color="#4f87ff" />
+
+    <ImageView
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:id="@+id/imageView3"
+        android:src="@drawable/more"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignRight="@+id/view2"
+        android:layout_alignEnd="@+id/view2"
+        android:tint="#888"
+        android:layout_marginRight="4dp" />
+
+
+
+
+</RelativeLayout>
