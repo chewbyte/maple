@@ -1,1 +1,1 @@
-# geogab
+# Project GG "geogab"
