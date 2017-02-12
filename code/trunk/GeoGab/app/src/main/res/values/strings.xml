@@ -5,4 +5,10 @@
     <string name="radio_debate">Debate: Inspire discussion or debate about local topics.</string>
     <string name="radio_awareness">Awareness: Make locals aware of travel restrictions or emergencies.</string>
     <string name="radio_curiosity">Curiosity: Gain recommendations and learn about local culture and points of interest.</string>
+    <string name="app_title">Maple</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 </resources>
