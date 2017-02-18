@@ -1,6 +1,7 @@
 package com.chewbyte.geogab;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -22,6 +23,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -194,6 +196,9 @@ public class MapSelectActivity extends AppCompatActivity implements NavigationVi
                         Session.getUserById(1),
                         map
                 );
+
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
                 setMarkerPanelVisibility(false);
                 setThreadPanelVisibility(false);
