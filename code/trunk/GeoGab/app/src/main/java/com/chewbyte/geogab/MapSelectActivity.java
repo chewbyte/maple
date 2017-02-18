@@ -61,7 +61,7 @@ import retrofit2.Response;
 
 public class MapSelectActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "MapSelectActivity";
 
     private MapView mapView;
     private MapboxMap map;
@@ -185,6 +185,15 @@ public class MapSelectActivity extends AppCompatActivity implements NavigationVi
                 Session.setThreadTitle(String.valueOf(ThreadText.getText()));
 
                 map.removeAnnotation(droppedMarker);
+
+                new ThreadHeader(
+                        droppedMarker.getPosition(),
+                        Session.getThreadTitle(),
+                        "Snippet goes here.",
+                        Session.getCategorySelected(),
+                        Session.getUserById(1),
+                        map
+                );
 
                 setMarkerPanelVisibility(false);
                 setThreadPanelVisibility(false);
