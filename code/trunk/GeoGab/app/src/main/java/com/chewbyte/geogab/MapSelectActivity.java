@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -16,7 +15,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
-import android.text.SpannableString;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
@@ -52,8 +50,6 @@ import com.mapbox.services.geocoding.v5.GeocodingCriteria;
 import com.mapbox.services.geocoding.v5.MapboxGeocoding;
 import com.mapbox.services.geocoding.v5.models.CarmenFeature;
 import com.mapbox.services.geocoding.v5.models.GeocodingResponse;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -101,6 +97,22 @@ public class MapSelectActivity extends AppCompatActivity implements NavigationVi
         MapboxAccountManager.start(this, getString(R.string.access_token));
         setContentView(R.layout.activity_map_select);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Maple");
+
+        // Get TextView of the Appbar
+        TextView toolbarTitle = null;
+        for (int i = 0; i < toolbar.getChildCount(); ++i) {
+            View child = toolbar.getChildAt(i);
+            if (child instanceof TextView) {
+                if (((TextView) child).getText().equals("Maple"))
+                    toolbarTitle = (TextView) child;
+                break;
+            }
+        }
+        Typeface face = Typeface.createFromAsset(getAssets(), "mastoc.ttf");
+        toolbarTitle.setTypeface(face);
+        toolbarTitle.setTextSize(toolbarTitle.getTextSize()*0.5f);
+
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -111,6 +123,10 @@ public class MapSelectActivity extends AppCompatActivity implements NavigationVi
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        View header = navigationView.getHeaderView(0);
+        TextView nav_header_title = (TextView) header.findViewById(R.id.nav_header_title);
+        nav_header_title.setTypeface(face);
 
         // Mapbox mapView
         mapView = (MapView) findViewById(R.id.mapView);
