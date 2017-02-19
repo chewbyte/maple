@@ -2,7 +2,6 @@ package com.chewbyte.geogab;
 
 import android.graphics.Bitmap;
 import android.os.Parcel;
-import android.widget.TextView;
 
 import com.chewbyte.geogab.common.Category;
 import com.chewbyte.geogab.common.User;
@@ -10,10 +9,6 @@ import com.mapbox.mapboxsdk.annotations.BaseMarkerViewOptions;
 import com.mapbox.mapboxsdk.annotations.Icon;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
-
-import org.w3c.dom.Text;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by Chris on 11/09/2016.

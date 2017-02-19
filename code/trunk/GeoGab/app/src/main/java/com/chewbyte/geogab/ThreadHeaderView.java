@@ -2,7 +2,6 @@ package com.chewbyte.geogab;
 
 import com.chewbyte.geogab.common.Category;
 import com.chewbyte.geogab.common.User;
-import com.mapbox.mapboxsdk.annotations.BaseMarkerViewOptions;
 import com.mapbox.mapboxsdk.annotations.MarkerView;
 
 /**
