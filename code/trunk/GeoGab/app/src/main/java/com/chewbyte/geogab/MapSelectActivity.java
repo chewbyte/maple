@@ -31,7 +31,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.chewbyte.geogab.common.Category;
+import com.chewbyte.geogab.MapleObject.MapleMap;
 import com.chewbyte.geogab.common.Session;
 import com.chewbyte.geogab.common.ThreadHeader;
 import com.mapbox.mapboxsdk.MapboxAccountManager;
@@ -101,8 +101,27 @@ public class MapSelectActivity extends AppCompatActivity implements NavigationVi
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Maple");
 
-        // Get TextView of the Appbar
-        TextView toolbarTitle = null;
+        MapleService mapleService = ServiceGenerator.createService(MapleService.class);
+        Call<List<MapleMap>> call = mapleService.getAllMaps();
+        call.enqueue(new Callback<List<MapleMap>>() {
+                         @Override
+                         public void onResponse(Call<List<MapleMap>> call, Response<List<MapleMap>> response) {
+                             if (response.isSuccessful()) {
+                                 Log.v("success","success");
+                             } else {
+
+                             }
+                         }
+
+                         @Override
+                         public void onFailure(Call<List<MapleMap>> call, Throwable t) {
+                             // something went completely south (like no internet connection)
+                             Log.d("Error", t.getMessage());
+                         }
+                     });
+
+                // Get TextView of the Appbar
+                TextView toolbarTitle = null;
         for (int i = 0; i < toolbar.getChildCount(); ++i) {
             View child = toolbar.getChildAt(i);
             if (child instanceof TextView) {
