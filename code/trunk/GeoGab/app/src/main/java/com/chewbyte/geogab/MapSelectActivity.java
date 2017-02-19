@@ -113,7 +113,7 @@ public class MapSelectActivity extends AppCompatActivity implements NavigationVi
         }
         Typeface face = Typeface.createFromAsset(getAssets(), "mastoc.ttf");
         toolbarTitle.setTypeface(face);
-        toolbarTitle.setTextSize(toolbarTitle.getTextSize()*0.5f);
+        toolbarTitle.setTextSize(toolbarTitle.getTextSize() * 0.5f);
 
         setSupportActionBar(toolbar);
 
@@ -167,8 +167,8 @@ public class MapSelectActivity extends AppCompatActivity implements NavigationVi
         // Load animations
         aBottomUp = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_bottom_up);
         aBottomDown = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_bottom_down);
-        aTopUp =  AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_top_up);
-        aTopDown =  AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_top_down);
+        aTopUp = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_top_up);
+        aTopDown = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_top_down);
 
         // Thread Panel Cancel Button
         ThreadCancel = (Button) findViewById(R.id.buttonCancel);
@@ -197,7 +197,10 @@ public class MapSelectActivity extends AppCompatActivity implements NavigationVi
                         map
                 );
 
-                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                Session.setThreadTitle("");
+                ThreadText.setText("");
+
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
                 setMarkerPanelVisibility(false);
@@ -257,16 +260,16 @@ public class MapSelectActivity extends AppCompatActivity implements NavigationVi
         bNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(markerValid) {
+                if (markerValid) {
                     LatLng viewMarker = new LatLng();
-                    viewMarker.setLatitude(droppedMarker.getPosition().getLatitude()+0.00075);
+                    viewMarker.setLatitude(droppedMarker.getPosition().getLatitude() + 0.00075);
                     viewMarker.setLongitude(droppedMarker.getPosition().getLongitude());
 
                     map.setCameraPosition(new CameraPosition.Builder()
                             .target(viewMarker)
                             .zoom(15)
                             .build());
-                    if(ThreadPanel.getVisibility() == View.INVISIBLE) {
+                    if (ThreadPanel.getVisibility() == View.INVISIBLE) {
                         setThreadPanelVisibility(true);
                     }
                 }
@@ -291,8 +294,6 @@ public class MapSelectActivity extends AppCompatActivity implements NavigationVi
 
                 mapboxMap.getMarkerViewManager().addMarkerViewAdapter(new ThreadHeaderAdapter(MapSelectActivity.this));
 
-                initTestMarkers();
-
                 // Behavior when the map is touched
                 mapboxMap.setOnMapClickListener(new MapboxMap.OnMapClickListener() {
                     @Override
@@ -302,7 +303,7 @@ public class MapSelectActivity extends AppCompatActivity implements NavigationVi
                         setThreadPanelVisibility(false);
 
                         // Remove previous dropped markers
-                        if(droppedMarker != null) {
+                        if (droppedMarker != null) {
                             map.removeAnnotation(droppedMarker);
                         }
                     }
@@ -317,7 +318,7 @@ public class MapSelectActivity extends AppCompatActivity implements NavigationVi
                                 .position(point);
 
                         // Remove previous dropped markers
-                        if(droppedMarker != null) {
+                        if (droppedMarker != null) {
                             map.removeAnnotation(droppedMarker);
                         }
 
@@ -334,45 +335,6 @@ public class MapSelectActivity extends AppCompatActivity implements NavigationVi
                 });
             }
         });
-    }
-
-    private void initTestMarkers() {
-
-        new ThreadHeader(
-                new LatLng(51.466926, -0.111778),
-                "Party here!",
-                "Big party here, gonna be lit af \uD83D\uDE02, get on down asap or miss out! BYOD! \uD83D\uDE02",
-                Category.EVENT,
-                Session.getUserById(1),
-                map
-        );
-
-        new ThreadHeader(
-                new LatLng(51.468271, -0.120958),
-                "Protest against new build",
-                "Please come and take part in a sensible debate about the future of our city. \uD83D\uDE20 \uD83D\uDE20 \uD83D\uDE20",
-                Category.DEBATE,
-                Session.getUserById(2),
-                map
-        );
-
-        new ThreadHeader(
-                new LatLng(51.462620, -0.114949),
-                "Huge car crash",
-                "Emergency services are on their way, please stay clear.",
-                Category.AWARENESS,
-                Session.getUserById(3),
-                map
-        );
-
-        new ThreadHeader(
-                new LatLng(51.472392, -0.122801),
-                "Abandoned LU Station?",
-                "Yes, its the Strand station. If you have any questions let me know lol.",
-                Category.CURIOSITY,
-                Session.getUserById(4),
-                map
-        );
     }
 
     private void setMarkerPanelVisibility(boolean visible) {
@@ -594,17 +556,17 @@ public class MapSelectActivity extends AppCompatActivity implements NavigationVi
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_maps) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_search) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_trending) {
 
         } else if (id == R.id.nav_manage) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_map_create) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_share) {
 
         }
 
