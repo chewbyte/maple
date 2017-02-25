@@ -3,7 +3,7 @@ package com.chewbyte.geogab.common;
 /**
  * Created by Chris on 24/07/2016.
  */
-public class User extends Unique {
+public class User {
 
     private int id;
     private String username;
