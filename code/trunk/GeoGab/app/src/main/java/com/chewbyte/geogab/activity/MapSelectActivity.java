@@ -2,6 +2,7 @@ package com.chewbyte.geogab.activity;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -105,28 +106,6 @@ public class MapSelectActivity extends AppCompatActivity implements NavigationVi
         setContentView(R.layout.activity_map_select);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Maple");
-
-        MapleService mapleService = ServiceGenerator.createService(MapleService.class);
-        Call<List<MapleMap>> call = mapleService.getAllMaps();
-        call.enqueue(new Callback<List<MapleMap>>() {
-            @Override
-            public void onResponse(Call<List<MapleMap>> call, Response<List<MapleMap>> response) {
-                if (response.isSuccessful()) {
-                    Log.v("wankmania", "starting");
-                    for (MapleMap map : response.body()) {
-                        Log.v("wankmania", map.getTitle());
-                    }
-                    Log.v("wankmania", "fini");
-                } else {
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<MapleMap>> call, Throwable t) {
-                Log.d("Error", t.getMessage());
-            }
-        });
 
         // Get TextView of the Appbar
         TextView toolbarTitle = null;
@@ -581,7 +560,8 @@ public class MapSelectActivity extends AppCompatActivity implements NavigationVi
         int id = item.getItemId();
 
         if (id == R.id.nav_maps) {
-            // Handle the camera action
+            Intent intent = new Intent(this, MapListActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_search) {
 
         } else if (id == R.id.nav_trending) {
