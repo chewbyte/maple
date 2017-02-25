@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -20,8 +21,10 @@ import com.chewbyte.geogab.MapleObject.MapleMap;
 import com.chewbyte.geogab.MapleService;
 import com.chewbyte.geogab.R;
 import com.chewbyte.geogab.ServiceGenerator;
+import com.chewbyte.geogab.common.Session;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import retrofit2.Call;
@@ -35,6 +38,7 @@ public class MapListActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private ListView listView;
     private ArrayAdapter<String> listAdapter;
+    private ArrayList<MapleMap> mapList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +52,20 @@ public class MapListActivity extends AppCompatActivity {
         progressBar = (ProgressBar) findViewById(R.id.list_progressBar);
 
         listAllMaps();
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                TextView row = (TextView) view.findViewById(R.id.rowTextView);
+                MapleMap selectedMap = null;
+                for (MapleMap map: mapList) {
+                    selectedMap = map.getTitle().equals(row.getText()) ? map : null;
+                }
+                Session.setMapSelected(selectedMap);
+                finish();
+            }
+        });
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +85,8 @@ public class MapListActivity extends AppCompatActivity {
             public void onResponse(Call<List<MapleMap>> call, Response<List<MapleMap>> response) {
                 if (response.isSuccessful()) {
                     ArrayList<String> list = new ArrayList<>();
-                    for (MapleMap map : response.body()) {
+                    mapList = (ArrayList<MapleMap>) response.body();
+                    for (MapleMap map : mapList) {
                         list.add(map.getTitle());
                     }
                     listAdapter = new ArrayAdapter<>(getApplicationContext(), R.layout.list_row, list);

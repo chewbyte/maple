@@ -1,5 +1,6 @@
 package com.chewbyte.geogab.common;
 
+import com.chewbyte.geogab.MapleObject.MapleMap;
 import com.chewbyte.geogab.R;
 
 import java.util.HashMap;
@@ -17,6 +18,8 @@ public abstract class Session {
 
     private static String threadTitle = "";
 
+    private static MapleMap mapSelected;
+
     public static HashMap<Integer,User> users = new HashMap<Integer, User>(){{
         put(1, new User(1,"loco92", "Loco", "Roco", R.drawable.profile3));
         put(2, new User(2,"jcdenton", "JC", "Denton", R.drawable.profile));
@@ -30,6 +33,14 @@ public abstract class Session {
 
     public static void setCategorySelected(Category categorySelected) {
         Session.categorySelected = categorySelected;
+    }
+
+    public static MapleMap getMapSelected() {
+        return mapSelected;
+    }
+
+    public static void setMapSelected(MapleMap mapSelected) {
+        Session.mapSelected = mapSelected;
     }
 
     public static String getThreadTitle() {
