@@ -16,8 +16,14 @@
         <service android:name="com.mapbox.mapboxsdk.telemetry.TelemetryService" />
 
         <activity
-            android:name=".MapSelectActivity"
+            android:name=".activity.MapSelectActivity"
             android:label="@string/app_title"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
+        </activity>
+        <activity
+            android:name=".activity.MapListActivity"
+            android:label="@string/title_activity_map_list"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

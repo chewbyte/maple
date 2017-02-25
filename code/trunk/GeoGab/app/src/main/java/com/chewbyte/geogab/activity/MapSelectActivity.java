@@ -1,4 +1,4 @@
-package com.chewbyte.geogab;
+package com.chewbyte.geogab.activity;
 
 import android.Manifest;
 import android.content.Context;
@@ -32,6 +32,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chewbyte.geogab.MapleObject.MapleMap;
+import com.chewbyte.geogab.MapleService;
+import com.chewbyte.geogab.R;
+import com.chewbyte.geogab.RadioButtons;
+import com.chewbyte.geogab.ServiceGenerator;
+import com.chewbyte.geogab.ThreadHeaderAdapter;
 import com.chewbyte.geogab.common.Session;
 import com.chewbyte.geogab.common.ThreadHeader;
 import com.mapbox.mapboxsdk.MapboxAccountManager;
@@ -104,24 +109,27 @@ public class MapSelectActivity extends AppCompatActivity implements NavigationVi
         MapleService mapleService = ServiceGenerator.createService(MapleService.class);
         Call<List<MapleMap>> call = mapleService.getAllMaps();
         call.enqueue(new Callback<List<MapleMap>>() {
-                         @Override
-                         public void onResponse(Call<List<MapleMap>> call, Response<List<MapleMap>> response) {
-                             if (response.isSuccessful()) {
-                                 Log.v("success","success");
-                             } else {
+            @Override
+            public void onResponse(Call<List<MapleMap>> call, Response<List<MapleMap>> response) {
+                if (response.isSuccessful()) {
+                    Log.v("wankmania", "starting");
+                    for (MapleMap map : response.body()) {
+                        Log.v("wankmania", map.getTitle());
+                    }
+                    Log.v("wankmania", "fini");
+                } else {
 
-                             }
-                         }
+                }
+            }
 
-                         @Override
-                         public void onFailure(Call<List<MapleMap>> call, Throwable t) {
-                             // something went completely south (like no internet connection)
-                             Log.d("Error", t.getMessage());
-                         }
-                     });
+            @Override
+            public void onFailure(Call<List<MapleMap>> call, Throwable t) {
+                Log.d("Error", t.getMessage());
+            }
+        });
 
-                // Get TextView of the Appbar
-                TextView toolbarTitle = null;
+        // Get TextView of the Appbar
+        TextView toolbarTitle = null;
         for (int i = 0; i < toolbar.getChildCount(); ++i) {
             View child = toolbar.getChildAt(i);
             if (child instanceof TextView) {
@@ -358,7 +366,7 @@ public class MapSelectActivity extends AppCompatActivity implements NavigationVi
 
     private void setMarkerPanelVisibility(boolean visible) {
 
-        if(visible && (MarkerPanel.getVisibility() == View.INVISIBLE)) {
+        if (visible && (MarkerPanel.getVisibility() == View.INVISIBLE)) {
 
             MarkerPanel.startAnimation(aBottomUp);
             MarkerPanel.setVisibility(View.VISIBLE);
@@ -370,8 +378,7 @@ public class MapSelectActivity extends AppCompatActivity implements NavigationVi
 
             bSearch.setVisibility(View.INVISIBLE);
             bFilter.setVisibility(View.INVISIBLE);
-        }
-        else if (!visible && MarkerPanel.getVisibility() == View.VISIBLE) {
+        } else if (!visible && MarkerPanel.getVisibility() == View.VISIBLE) {
 
             MarkerPanel.startAnimation(aBottomDown);
             MarkerPanel.setVisibility(View.INVISIBLE);
@@ -391,9 +398,7 @@ public class MapSelectActivity extends AppCompatActivity implements NavigationVi
         if (visible && (ThreadPanel.getVisibility() == View.INVISIBLE)) {
             ThreadPanel.setVisibility(View.VISIBLE);
             ThreadPanel.startAnimation(aTopDown);
-        }
-
-        else if (!visible && (ThreadPanel.getVisibility() == View.VISIBLE)) {
+        } else if (!visible && (ThreadPanel.getVisibility() == View.VISIBLE)) {
             ThreadPanel.startAnimation(aTopUp);
             ThreadPanel.setVisibility(View.INVISIBLE);
         }
@@ -430,15 +435,15 @@ public class MapSelectActivity extends AppCompatActivity implements NavigationVi
                         CarmenFeature feature = results.get(0);
                         if (droppedMarker != null) {
 
-                            if(feature.getAddress() == null)
+                            if (feature.getAddress() == null)
                                 addr_short = feature.getText();
                             else
                                 addr_short = String.format("%s %s", feature.getAddress(), feature.getText());
 
                             addr_full = feature.getPlaceName();
                             addr_full = addr_full.replace(", United Kingdom", "");
-                            addr_full = addr_full.replace(addr_short+", ", "");
-                            addr_full = addr_full.substring(0,addr_full.length()-4);
+                            addr_full = addr_full.replace(addr_short + ", ", "");
+                            addr_full = addr_full.substring(0, addr_full.length() - 4);
 
                             tAddr_short.setText(addr_short);
                             tAddr_full.setText(addr_full);
@@ -479,7 +484,7 @@ public class MapSelectActivity extends AppCompatActivity implements NavigationVi
                         Manifest.permission.ACCESS_COARSE_LOCATION,
                         Manifest.permission.ACCESS_FINE_LOCATION}, 0);
             }
-            if(loc_services.areLocationPermissionsGranted()) {
+            if (loc_services.areLocationPermissionsGranted()) {
 
                 enableLocationTracking();
                 bLocate.setColorFilter(Color.parseColor("#FFCC00"));
