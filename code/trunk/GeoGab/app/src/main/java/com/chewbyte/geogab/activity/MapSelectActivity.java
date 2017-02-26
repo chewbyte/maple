@@ -202,6 +202,7 @@ public class MapSelectActivity extends AppCompatActivity implements NavigationVi
                     marker.setTitle(Session.getThreadTitle());
                     marker.setMapid(Session.getMapSelected().getId());
                     marker.setUserid("0");
+                    marker.setCategory(Session.getCategorySelected());
 
                     MapleService mapleService = ServiceGenerator.createService(MapleService.class);
                     Call<Void> call = mapleService.addMarker(marker);
@@ -527,7 +528,7 @@ public class MapSelectActivity extends AppCompatActivity implements NavigationVi
                         new LatLng(marker.getLatitude(), marker.getLongitude()),
                         marker.getTitle(),
                         "Snippet goes here.",
-                        Category.DEBATE,
+                        marker.getCategory(),
                         Session.getUserById(1),
                         map
                 );

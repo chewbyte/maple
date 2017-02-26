@@ -1,5 +1,7 @@
 package com.chewbyte.geogab.MapleObject;
 
+import com.chewbyte.geogab.common.Category;
+
 /**
  * Created by Chris on 19/02/2017.
  */
@@ -8,10 +10,18 @@ public class MapleMarker {
     String id;
     String title;
     float latitude;
+    float longitude;
+    String userid;
+    String mapid;
+    Category category;
 
-    public String getId() {
-        return id;
+    public Category getCategory() {
+        return category;
     }
+
+    public void setCategory(Category category) { this.category = category; }
+
+    public String getId() { return id; }
 
     public void setId(String id) {
         this.id = id;
@@ -56,8 +66,4 @@ public class MapleMarker {
     public void setMapid(String mapid) {
         this.mapid = mapid;
     }
-
-    float longitude;
-    String userid;
-    String mapid;
 }
