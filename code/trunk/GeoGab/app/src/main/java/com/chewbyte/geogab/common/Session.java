@@ -1,9 +1,12 @@
 package com.chewbyte.geogab.common;
 
 import com.chewbyte.geogab.MapleObject.MapleMap;
+import com.chewbyte.geogab.MapleObject.MapleMarker;
 import com.chewbyte.geogab.R;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by Chris on 24/07/2016.
@@ -19,6 +22,8 @@ public abstract class Session {
     private static String threadTitle = "";
 
     private static MapleMap mapSelected;
+
+    private static List<MapleMarker> markers;
 
     public static HashMap<Integer,User> users = new HashMap<Integer, User>(){{
         put(1, new User(1,"loco92", "Loco", "Roco", R.drawable.profile3));
@@ -41,6 +46,14 @@ public abstract class Session {
 
     public static void setMapSelected(MapleMap mapSelected) {
         Session.mapSelected = mapSelected;
+    }
+
+    public static List<MapleMarker> getMarkers() {
+        return markers;
+    }
+
+    public static void setMarkers(List<MapleMarker> markers) {
+        Session.markers = markers;
     }
 
     public static String getThreadTitle() {

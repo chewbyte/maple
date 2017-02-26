@@ -5,19 +5,22 @@
         <item
             android:id="@+id/nav_maps"
             android:icon="@drawable/ic_layers_black"
-            android:title="Select map" />
+            android:title="Select map"/>
         <item
             android:id="@+id/nav_search"
             android:icon="@drawable/ic_search_black"
-            android:title="Search maps" />
+            android:title="Search maps"
+            android:enabled="false"/>
         <item
             android:id="@+id/nav_trending"
             android:icon="@drawable/ic_whatshot_black"
-            android:title="Trending" />
+            android:title="Trending"
+            android:enabled="false"/>
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:title="Tools"
+            android:enabled="false"/>
     </group>
 
     <item android:title="My maps">
@@ -25,11 +28,13 @@
             <item
                 android:id="@+id/nav_map_create"
                 android:icon="@drawable/ic_add_location_black"
-                android:title="Create map" />
+                android:title="Create map"
+                android:enabled="false"/>
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:title="Share"
+                android:enabled="false"/>
         </menu>
     </item>
 

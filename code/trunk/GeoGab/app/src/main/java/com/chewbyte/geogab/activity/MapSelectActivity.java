@@ -33,11 +33,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chewbyte.geogab.MapleObject.MapleMap;
+import com.chewbyte.geogab.MapleObject.MapleMarker;
 import com.chewbyte.geogab.MapleService;
 import com.chewbyte.geogab.R;
 import com.chewbyte.geogab.RadioButtons;
 import com.chewbyte.geogab.ServiceGenerator;
 import com.chewbyte.geogab.ThreadHeaderAdapter;
+import com.chewbyte.geogab.common.Category;
 import com.chewbyte.geogab.common.Session;
 import com.chewbyte.geogab.common.ThreadHeader;
 import com.mapbox.mapboxsdk.MapboxAccountManager;
@@ -494,6 +496,20 @@ public class MapSelectActivity extends AppCompatActivity implements NavigationVi
     @Override
     public void onResume() {
         super.onResume();
+        if (Session.getMapSelected() != null && Session.getMarkers() != null) {
+            map.clear();
+
+            for (MapleMarker marker : Session.getMarkers()) {
+                new ThreadHeader(
+                        new LatLng(marker.getLatitude(), marker.getLongitude()),
+                        marker.getTitle(),
+                        "Snippet goes here.",
+                        Category.DEBATE,
+                        Session.getUserById(2),
+                        map
+                );
+            }
+        }
         mapView.onResume();
     }
 

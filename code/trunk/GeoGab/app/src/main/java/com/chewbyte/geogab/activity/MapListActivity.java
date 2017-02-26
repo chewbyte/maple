@@ -18,13 +18,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chewbyte.geogab.MapleObject.MapleMap;
+import com.chewbyte.geogab.MapleObject.MapleMarker;
 import com.chewbyte.geogab.MapleService;
 import com.chewbyte.geogab.R;
 import com.chewbyte.geogab.ServiceGenerator;
 import com.chewbyte.geogab.common.Session;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import retrofit2.Call;
@@ -38,7 +38,8 @@ public class MapListActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private ListView listView;
     private ArrayAdapter<String> listAdapter;
-    private ArrayList<MapleMap> mapList;
+    private List<MapleMap> mapList;
+    private List<MapleMarker> markerList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,10 +61,11 @@ public class MapListActivity extends AppCompatActivity {
                 TextView row = (TextView) view.findViewById(R.id.rowTextView);
                 MapleMap selectedMap = null;
                 for (MapleMap map: mapList) {
-                    selectedMap = map.getTitle().equals(row.getText()) ? map : null;
+                    selectedMap = map.getTitle().equals(row.getText()) ? map : selectedMap;
                 }
+                Toast.makeText(getApplicationContext(), selectedMap.getId(), Toast.LENGTH_LONG).show();
                 Session.setMapSelected(selectedMap);
-                finish();
+                retrieveMarkersForMap(selectedMap.getId());
             }
         });
 
@@ -83,9 +85,11 @@ public class MapListActivity extends AppCompatActivity {
         call.enqueue(new Callback<List<MapleMap>>() {
             @Override
             public void onResponse(Call<List<MapleMap>> call, Response<List<MapleMap>> response) {
+                Log.v("haah", call.request().toString());
+                Log.v("haah", response.body().toString());
                 if (response.isSuccessful()) {
                     ArrayList<String> list = new ArrayList<>();
-                    mapList = (ArrayList<MapleMap>) response.body();
+                    mapList = response.body();
                     for (MapleMap map : mapList) {
                         list.add(map.getTitle());
                     }
@@ -96,6 +100,30 @@ public class MapListActivity extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<List<MapleMap>> call, Throwable t) {
+                Log.d("Error", t.getMessage());
+                Toast.makeText(getApplicationContext(), "Failed to connect to the server.", Toast.LENGTH_LONG).show();
+                finish();
+            }
+        });
+    }
+
+    private void retrieveMarkersForMap(String mapid) {
+        MapleService mapleService = ServiceGenerator.createService(MapleService.class);
+        Call<List<MapleMarker>> call = mapleService.getMarkersByMapId(mapid);
+        call.enqueue(new Callback<List<MapleMarker>>() {
+            @Override
+            public void onResponse(Call<List<MapleMarker>> call, Response<List<MapleMarker>> response) {
+                Log.v("haah", call.request().toString());
+                Log.v("haah", response.body().toString());
+                if (response.isSuccessful()) {
+                    markerList = response.body();
+                    Session.setMarkers(markerList);
+                    Toast.makeText(getApplicationContext(), String.valueOf(markerList.size()), Toast.LENGTH_LONG).show();
+                }
+                finish();
+            }
+            @Override
+            public void onFailure(Call<List<MapleMarker>> call, Throwable t) {
                 Log.d("Error", t.getMessage());
                 Toast.makeText(getApplicationContext(), "Failed to connect to the server.", Toast.LENGTH_LONG).show();
                 finish();

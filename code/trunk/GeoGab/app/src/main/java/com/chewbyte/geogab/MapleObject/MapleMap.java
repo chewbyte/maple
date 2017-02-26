@@ -9,7 +9,6 @@ public class MapleMap {
 
     String id;
     String title;
-    List<String> markers;
     String userid;
 
     public String getId() {
@@ -26,14 +25,6 @@ public class MapleMap {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public List<String> getMarkers() {
-        return markers;
-    }
-
-    public void setMarkers(List<String> markers) {
-        this.markers = markers;
     }
 
     public String getUserid() {
