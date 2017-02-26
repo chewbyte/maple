@@ -39,7 +39,6 @@ public class MapListActivity extends AppCompatActivity {
     private ListView listView;
     private ArrayAdapter<String> listAdapter;
     private List<MapleMap> mapList;
-    private List<MapleMarker> markerList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,9 +84,9 @@ public class MapListActivity extends AppCompatActivity {
         call.enqueue(new Callback<List<MapleMap>>() {
             @Override
             public void onResponse(Call<List<MapleMap>> call, Response<List<MapleMap>> response) {
-                Log.v("haah", call.request().toString());
-                Log.v("haah", response.body().toString());
+                Log.v(TAG, call.request().toString());
                 if (response.isSuccessful()) {
+                    Log.v(TAG, response.body().toString());
                     ArrayList<String> list = new ArrayList<>();
                     mapList = response.body();
                     for (MapleMap map : mapList) {
@@ -113,12 +112,10 @@ public class MapListActivity extends AppCompatActivity {
         call.enqueue(new Callback<List<MapleMarker>>() {
             @Override
             public void onResponse(Call<List<MapleMarker>> call, Response<List<MapleMarker>> response) {
-                Log.v("haah", call.request().toString());
-                Log.v("haah", response.body().toString());
+                Log.v(TAG, call.request().toString());
                 if (response.isSuccessful()) {
-                    markerList = response.body();
-                    Session.setMarkers(markerList);
-                    Toast.makeText(getApplicationContext(), String.valueOf(markerList.size()), Toast.LENGTH_LONG).show();
+                    Log.v(TAG, response.body().toString());
+                    Session.setMarkers(response.body());
                 }
                 finish();
             }
