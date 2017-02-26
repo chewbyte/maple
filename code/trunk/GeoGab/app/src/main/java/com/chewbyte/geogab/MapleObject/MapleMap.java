@@ -1,7 +1,5 @@
 package com.chewbyte.geogab.MapleObject;
 
-import java.util.List;
-
 /**
  * Created by Chris on 19/02/2017.
  */

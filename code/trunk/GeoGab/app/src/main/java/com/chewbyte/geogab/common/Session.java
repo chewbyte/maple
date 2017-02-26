@@ -4,7 +4,6 @@ import com.chewbyte.geogab.MapleObject.MapleMap;
 import com.chewbyte.geogab.MapleObject.MapleMarker;
 import com.chewbyte.geogab.R;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 

@@ -1,6 +1,5 @@
 package com.chewbyte.geogab.activity;
 
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,10 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -62,7 +59,7 @@ public class MapListActivity extends AppCompatActivity {
                 for (MapleMap map: mapList) {
                     selectedMap = map.getTitle().equals(row.getText()) ? map : selectedMap;
                 }
-                Toast.makeText(getApplicationContext(), selectedMap.getId(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), String.format("Selected: %s", selectedMap.getTitle()), Toast.LENGTH_LONG).show();
                 Session.setMapSelected(selectedMap);
                 retrieveMarkersForMap(selectedMap.getId());
             }

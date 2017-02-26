@@ -32,12 +32,9 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.chewbyte.geogab.MapleObject.MapleMap;
 import com.chewbyte.geogab.MapleObject.MapleMarker;
-import com.chewbyte.geogab.MapleService;
 import com.chewbyte.geogab.R;
 import com.chewbyte.geogab.RadioButtons;
-import com.chewbyte.geogab.ServiceGenerator;
 import com.chewbyte.geogab.ThreadHeaderAdapter;
 import com.chewbyte.geogab.common.Category;
 import com.chewbyte.geogab.common.Session;
