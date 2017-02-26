@@ -32,9 +32,12 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.chewbyte.geogab.MapleObject.MapleMap;
 import com.chewbyte.geogab.MapleObject.MapleMarker;
+import com.chewbyte.geogab.MapleService;
 import com.chewbyte.geogab.R;
 import com.chewbyte.geogab.RadioButtons;
+import com.chewbyte.geogab.ServiceGenerator;
 import com.chewbyte.geogab.ThreadHeaderAdapter;
 import com.chewbyte.geogab.common.Category;
 import com.chewbyte.geogab.common.Session;
@@ -188,28 +191,54 @@ public class MapSelectActivity extends AppCompatActivity implements NavigationVi
         ThreadNext = (Button) findViewById(R.id.buttonNext);
         ThreadNext.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Session.setThreadTitle(String.valueOf(ThreadText.getText()));
+            public void onClick(final View view) {
 
-                map.removeAnnotation(droppedMarker);
+                if(Session.getMapSelected() != null) {
+                    Session.setThreadTitle(String.valueOf(ThreadText.getText()));
 
-                new ThreadHeader(
-                        droppedMarker.getPosition(),
-                        Session.getThreadTitle(),
-                        "Snippet goes here.",
-                        Session.getCategorySelected(),
-                        Session.getUserById(1),
-                        map
-                );
+                    MapleMarker marker = new MapleMarker();
+                    marker.setLatitude((float) droppedMarker.getPosition().getLatitude());
+                    marker.setLongitude((float) droppedMarker.getPosition().getLongitude());
+                    marker.setTitle(Session.getThreadTitle());
+                    marker.setMapid(Session.getMapSelected().getId());
+                    marker.setUserid("0");
 
-                Session.setThreadTitle("");
-                ThreadText.setText("");
+                    MapleService mapleService = ServiceGenerator.createService(MapleService.class);
+                    Call<Void> call = mapleService.addMarker(marker);
+                    call.enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+                            if(response.isSuccessful()) {
+                                Toast.makeText(getApplicationContext(), "Successfully persisted to server.", Toast.LENGTH_LONG).show();
 
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                                new ThreadHeader(
+                                        droppedMarker.getPosition(),
+                                        Session.getThreadTitle(),
+                                        "Snippet goes here.",
+                                        Session.getCategorySelected(),
+                                        Session.getUserById(1),
+                                        map
+                                );
 
-                setMarkerPanelVisibility(false);
-                setThreadPanelVisibility(false);
+                                Session.setThreadTitle("");
+                                ThreadText.setText("");
+                                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                                setMarkerPanelVisibility(false);
+                                setThreadPanelVisibility(false);
+
+                                map.removeAnnotation(droppedMarker);
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+                            Toast.makeText(getApplicationContext(), "Failed to connect to the server.", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                } else {
+                    Toast.makeText(getApplicationContext(), "Aborted: No map selected.", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -506,7 +535,7 @@ public class MapSelectActivity extends AppCompatActivity implements NavigationVi
                         marker.getTitle(),
                         "Snippet goes here.",
                         Category.DEBATE,
-                        Session.getUserById(2),
+                        Session.getUserById(1),
                         map
                 );
             }
