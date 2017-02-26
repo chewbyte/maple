@@ -360,13 +360,6 @@ public class MapSelectActivity extends AppCompatActivity implements NavigationVi
                         reverseGeocode(droppedMarker.getPosition(), map);
                     }
                 });
-
-                mapboxMap.getMarkerViewManager().setOnMarkerViewClickListener(new MapboxMap.OnMarkerViewClickListener() {
-                    @Override
-                    public boolean onMarkerClick(@NonNull Marker marker, @NonNull View view, @NonNull MapboxMap.MarkerViewAdapter adapter) {
-                        return true;
-                    }
-                });
             }
         });
     }
