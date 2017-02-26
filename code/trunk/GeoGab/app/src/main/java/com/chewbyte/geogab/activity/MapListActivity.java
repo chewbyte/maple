@@ -50,7 +50,13 @@ public class MapListActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.list_map);
         progressBar = (ProgressBar) findViewById(R.id.list_progressBar);
 
-        listAllMaps();
+        Handler handler = new Handler();
+        Runnable r = new Runnable() {
+            public void run() {
+                listAllMaps();
+            }
+        };
+        handler.postDelayed(r, 500);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
