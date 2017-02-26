@@ -2,6 +2,8 @@
     android:id="@+id/rowTextView"
     android:layout_width="fill_parent"
     android:layout_height="60dp"
+    android:textColor="@android:color/black"
+    android:alpha="0.87"
     android:paddingLeft="16dp"
     android:textSize="18dp"
     android:gravity="center_vertical">
