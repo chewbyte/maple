@@ -353,9 +353,11 @@ public class MapSelectActivity extends AppCompatActivity implements NavigationVi
 
             bSearch.startAnimation(aBottomDown);
             bFilter.startAnimation(aBottomDown);
+            bLocate.startAnimation(aBottomDown);
 
             bSearch.setVisibility(View.INVISIBLE);
             bFilter.setVisibility(View.INVISIBLE);
+            bLocate.setVisibility(View.INVISIBLE);
         } else if (!visible && MarkerPanel.getVisibility() == View.VISIBLE) {
 
             MarkerPanel.startAnimation(aBottomDown);
@@ -365,9 +367,11 @@ public class MapSelectActivity extends AppCompatActivity implements NavigationVi
 
             bSearch.startAnimation(aBottomUp);
             bFilter.startAnimation(aBottomUp);
+            bLocate.startAnimation(aBottomUp);
 
             bSearch.setVisibility(View.VISIBLE);
             bFilter.setVisibility(View.VISIBLE);
+            bLocate.setVisibility(View.VISIBLE);
         }
     }
 
