@@ -8,6 +8,11 @@
    2. Local and national debate – encouraging dialogue and action in regards to important issues within communities
    3. Awareness – informing people of dangers, disruptions to public services or neighbourhood vigilance
    4. Supporting curiosity – allowing people to seek answers, learn and discover regarding the ‘sights and sounds’ of a city
+## Technology
+- Android 7.0
+- Mapbox 4.2.2 for Mapping
+- Mapbox Services 1.3.1 for Geolocation
+- Retrofit as a Java/Android HTTP client
 ## Repository structure
 <pre>
 root
